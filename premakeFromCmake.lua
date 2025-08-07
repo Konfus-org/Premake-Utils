@@ -86,14 +86,14 @@ function RunCMake(cmakeSourceDir, buildDir, installDir, config, platform, cmakeO
     end
 
     -- Build
-    local buildCmd = string.format('cmake --build "%s" --config %s --parallel 8', buildDir, config)
+    local buildCmd = string.format('cmake --build "%s" --config %s -j 16', buildDir, config)
     print("[CMake] Building: " .. buildCmd)
     if os.execute(buildCmd) ~= true then
         error("CMake build failed.")
     end
 
     -- Install
-    local installCmd = string.format('cmake --install "%s" --config %s --parallel 8', buildDir, config)
+    local installCmd = string.format('cmake --install "%s" --config %s -j 16', buildDir, config)
     print("[CMake] Installing: " .. installCmd)
     if os.execute(installCmd) ~= true then
         error("CMake install failed.")
